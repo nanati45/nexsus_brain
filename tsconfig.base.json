@@ -1,0 +1,25 @@
+{
+  "compileOnSave": false,
+  "compilerOptions": {
+    "rootDir": ".",
+    "sourceMap": true,
+    "declaration": false,
+    "moduleResolution": "node",
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "importHelpers": true,
+    "target": "es2015",
+    "module": "esnext",
+    "lib": ["es2020", "dom"],
+    "skipLibCheck": true,
+    "skipDefaultLibCheck": true,
+    "baseUrl": ".",
+    "paths": {
+      "@nexus-brain/ui-components": ["ui-components/src/index.ts"],
+      "@nexus-brain/utils": ["utils/src/index.ts"],
+      "@nexus-brain/feature-x": ["feature-x/src/index.ts"],
+      "@nexus-brain/feature-y": ["feature-y/src/index.ts"]
+    }
+  },
+  "exclude": ["node_modules", "tmp"]
+}

@@ -1,0 +1,9 @@
+{
+  "name": "feature-x",
+  "$schema": "../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "feature-x/src",
+  "projectType": "library",
+  "tags": [],
+  "// targets": "to see all targets run: nx show project feature-x --web",
+  "targets": {}
+}
