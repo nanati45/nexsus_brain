@@ -1,1 +1,1 @@
-export * from './lib/feature-x';
+export * from './lib/note-capture';
