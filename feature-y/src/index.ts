@@ -1,1 +1,1 @@
-export * from './lib/feature-y';
+export * from './lib/note-vault';
