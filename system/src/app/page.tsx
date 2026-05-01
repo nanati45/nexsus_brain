@@ -32,12 +32,17 @@ export default function Index() {
     setNotes((currentNotes) => [note, ...currentNotes]);
   };
 
+  const latestNoteTitle = notes[0]?.title ?? 'No notes yet';
+
   return (
     <main className={styles.page}>
       <section className={styles.shell}>
         <header className={styles.hero}>
           <div className={styles.heroCopy}>
-            <p className={styles.eyebrow}>NexusBrain</p>
+            <div className={styles.heroTagRow}>
+              <p className={styles.eyebrow}>NexusBrain</p>
+              <span className={styles.statusPill}>Capture-first workflow</span>
+            </div>
             <h1 className={styles.title}>
               Capture now. Organize when your mind is ready.
             </h1>
@@ -57,6 +62,20 @@ export default function Index() {
             </div>
           </div>
         </header>
+
+        <section className={styles.overview}>
+          <div className={styles.overviewCard}>
+            <span className={styles.overviewLabel}>Latest Capture</span>
+            <p className={styles.overviewText}>{latestNoteTitle}</p>
+          </div>
+          <div className={styles.overviewCard}>
+            <span className={styles.overviewLabel}>Interaction Model</span>
+            <p className={styles.overviewText}>
+              Capture stays light, while the vault handles retrieval when you
+              are ready to sort and search.
+            </p>
+          </div>
+        </section>
 
         <section className={styles.workspace}>
           <div className={styles.capturePane}>
