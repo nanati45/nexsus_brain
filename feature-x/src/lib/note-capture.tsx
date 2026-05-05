@@ -1,35 +1,54 @@
 import { useState, type FormEvent } from 'react';
 
 import { AppButton } from '@nexus-brain/ui-components';
-import { truncateText, type NoteRecord } from '@nexus-brain/utils';
+import {
+  truncateText,
+  type NotePriority,
+  type NoteRecord,
+} from '@nexus-brain/utils';
 
 export type NoteCaptureProps = {
   onCapture: (note: NoteRecord) => void;
 };
 
+function createNoteId() {
+  return globalThis.crypto?.randomUUID?.() ?? `note-${Date.now()}`;
+}
+
 export function NoteCapture({ onCapture }: NoteCaptureProps) {
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
+  const [tags, setTags] = useState('');
+  const [priority, setPriority] = useState<NotePriority>('medium');
 
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
     const trimmedTitle = title.trim();
     const trimmedContent = content.trim();
+    const parsedTags = tags
+      .split(',')
+      .map((tag) => tag.trim().toLowerCase())
+      .filter(Boolean)
+      .slice(0, 5);
 
     if (!trimmedTitle || !trimmedContent) {
       return;
     }
 
     onCapture({
-      id: crypto.randomUUID(),
+      id: createNoteId(),
       title: truncateText(trimmedTitle, 80),
       content: trimmedContent,
       createdAt: new Date().toISOString(),
+      priority,
+      tags: parsedTags,
     });
 
     setTitle('');
     setContent('');
+    setTags('');
+    setPriority('medium');
   };
 
   return (
@@ -128,6 +147,66 @@ export function NoteCapture({ onCapture }: NoteCaptureProps) {
             }}
           />
         </label>
+
+        <div
+          style={{
+            display: 'grid',
+            gap: '0.9rem',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(160px, 1fr))',
+          }}
+        >
+          <label
+            style={{
+              color: '#0f172a',
+              display: 'grid',
+              fontSize: '0.95rem',
+              fontWeight: 600,
+              gap: '0.45rem',
+            }}
+          >
+            <span>Priority</span>
+            <select
+              value={priority}
+              onChange={(event) =>
+                setPriority(event.target.value as NotePriority)
+              }
+              style={{
+                border: '1px solid #cbd5e1',
+                borderRadius: '0.75rem',
+                fontSize: '0.95rem',
+                padding: '0.8rem 0.9rem',
+              }}
+            >
+              <option value="low">Low</option>
+              <option value="medium">Medium</option>
+              <option value="high">High</option>
+            </select>
+          </label>
+
+          <label
+            style={{
+              color: '#0f172a',
+              display: 'grid',
+              fontSize: '0.95rem',
+              fontWeight: 600,
+              gap: '0.45rem',
+            }}
+          >
+            <span>Tags</span>
+            <input
+              type="text"
+              value={tags}
+              onChange={(event) => setTags(event.target.value)}
+              placeholder="ideas, research, follow-up"
+              style={{
+                border: '1px solid #cbd5e1',
+                borderRadius: '0.75rem',
+                fontSize: '0.95rem',
+                padding: '0.8rem 0.9rem',
+              }}
+            />
+          </label>
+        </div>
 
         <div
           style={{

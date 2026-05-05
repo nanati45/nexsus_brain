@@ -4,6 +4,7 @@ import { NoteVault, type NoteVaultProps } from '@nexus-brain/feature-y';
 import styles from './page.module.css';
 
 export type NoteWorkspaceViewProps = {
+  highPriorityCount: number;
   latestNoteTitle: string;
   noteCount: number;
   captureProps: NoteCaptureProps;
@@ -11,6 +12,7 @@ export type NoteWorkspaceViewProps = {
 };
 
 export function NoteWorkspaceView({
+  highPriorityCount,
   latestNoteTitle,
   noteCount,
   captureProps,
@@ -41,6 +43,10 @@ export function NoteWorkspaceView({
             <div className={styles.metricCard}>
               <span className={styles.metricLabel}>System Role</span>
               <strong className={styles.metricValue}>Orchestrator</strong>
+            </div>
+            <div className={styles.metricCard}>
+              <span className={styles.metricLabel}>Focus Queue</span>
+              <strong className={styles.metricValue}>{highPriorityCount}</strong>
             </div>
           </div>
         </header>

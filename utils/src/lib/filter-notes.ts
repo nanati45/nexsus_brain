@@ -1,17 +1,33 @@
-import type { NoteRecord } from './note-types';
+import type { NotePriority, NoteRecord } from './note-types';
 
-export function filterNotes<T extends Pick<NoteRecord, 'title' | 'content'>>(
+export type NoteFilterOptions = {
+  priority?: NotePriority | 'all';
+};
+
+export function filterNotes<
+  T extends Pick<NoteRecord, 'title' | 'content'> &
+    Partial<Pick<NoteRecord, 'priority' | 'tags'>>,
+>(
   notes: T[],
-  keyword: string
+  keyword: string,
+  options: NoteFilterOptions = {}
 ): T[] {
   const normalizedKeyword = keyword.trim().toLowerCase();
+  const priority = options.priority ?? 'all';
 
-  if (!normalizedKeyword) {
-    return notes;
-  }
+  return notes.filter(({ title, content, priority: notePriority, tags }) => {
+    const matchesPriority = priority === 'all' || notePriority === priority;
 
-  return notes.filter(({ title, content }) => {
-    const searchableText = `${title} ${content}`.toLowerCase();
+    if (!matchesPriority) {
+      return false;
+    }
+
+    if (!normalizedKeyword) {
+      return true;
+    }
+
+    const searchableTags = tags?.join(' ') ?? '';
+    const searchableText = `${title} ${content} ${searchableTags}`.toLowerCase();
     return searchableText.includes(normalizedKeyword);
   });
 }
