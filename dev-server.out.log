@@ -1,0 +1,18 @@
+
+> @nexus-brain/source@0.0.0 dev
+> nx dev system --port=3000
+
+
+[2m> [22m[2mnx run[22m system:dev --port=3000
+
+[2m> [22mnext dev --port=3000
+
+[1m[38;2;173;127;168m▲ Next.js 16.1.7[39m[22m (Turbopack)
+- Local:         http://localhost:3000
+- Network:       http://192.168.137.3:3000
+
+[32m[1m✓[22m[39m Starting...
+[32m[1m✓[22m[39m Ready in 2.3s
+ GET / [32m200[39m in 518ms[2m (compile: 240ms, render: 278ms)[22m
+ GET / [32m200[39m in 37ms[2m (compile: 4ms, render: 34ms)[22m
+ GET / [32m200[39m in 34ms[2m (compile: 3ms, render: 31ms)[22m
