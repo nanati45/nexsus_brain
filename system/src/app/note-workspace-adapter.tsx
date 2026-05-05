@@ -3,7 +3,6 @@
 import { useCallback, useMemo, useState } from 'react';
 
 import type { NoteCaptureProps } from '@nexus-brain/feature-x';
-import type { NoteVaultProps } from '@nexus-brain/feature-y';
 import type { NoteRecord } from '@nexus-brain/utils';
 
 import {
